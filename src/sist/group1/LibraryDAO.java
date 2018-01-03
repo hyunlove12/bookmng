@@ -1,153 +1,126 @@
 package sist.group1;
 
-import java.util.*;
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+
 
 public class LibraryDAO {
 
 	/*
-	 * 
-	 * this.users.add(new User("","","","","")); ÀüÃ¼ »ç¿ëÀÚ Á¤º¸ ÀúÀå¿ë ¸®½ºÆ®¿¡ ³Ö´Â ¹æ¹ı
-	 * this.books.add(new Book("","","","")); ÀüÃ¼ Ã¥ Á¤º¸ ÀúÀå¿ë ¸®½ºÆ®¿¡ ³Ö´Â ¹æ¹ı
-	 * this.checkOuts.add(new CheckOut("B001","U001","2017-12-27")); ´ëÃâ ÀüÃ¼ Á¤º¸ ¸®½ºÆ®¿¡
-	 * ³Ö´Â ¹æ¹ı for(CheckOut c : checkOuts) { ¸®½ºÆ®¿¡¼­ Æ¯Á¤ ¸Å°³º¯¼ö °ª¿¡ ¸Â°Ô °´Ã¼ Á¤º¸ ²¨³»¿À´Â ¹æ¹ı
-	 * if(c.getcBookNo().equals("B001")) {
-	 * 
-	 * } Set<String>key = TestClass.testBook.keySet(); Iterator it = key.iterator();
-	 * while(it.hasNext()){ ¸Ê¿¡¼­ Æ¯Á¤ ¸Å°³º¯¼ö °ª¿¡ ¸Â°Ô °´Ã¼ Á¤º¸ ²¨³»¿À´Â ¹æ¹ı String key =
-	 * (String)it.next(); Book b = TestClass.testBook.get(key); }
-	 * 
-	 * }
-	 */
-
+	
+	this.users.add(new User("","","","","")); ì „ì²´ ì‚¬ìš©ì ì •ë³´ ì €ì¥ìš© ë¦¬ìŠ¤íŠ¸ì— ë„£ëŠ” ë°©ë²•
+	this.books.add(new Book("","","","")); ì „ì²´ ì±… ì •ë³´ ì €ì¥ìš© ë¦¬ìŠ¤íŠ¸ì— ë„£ëŠ” ë°©ë²•
+	this.checkOuts.add(new CheckOut("B001","U001","2017-12-27")); ëŒ€ì¶œ ì „ì²´ ì •ë³´ ë¦¬ìŠ¤íŠ¸ì— ë„£ëŠ” ë°©ë²•
+	for(CheckOut c : checkOuts) { ë¦¬ìŠ¤íŠ¸ì—ì„œ íŠ¹ì • ë§¤ê°œë³€ìˆ˜ ê°’ì— ë§ê²Œ ê°ì²´ ì •ë³´ êº¼ë‚´ì˜¤ëŠ” ë°©ë²•
+		if(c.getcBookNo().equals("B001")) {
+		
+		}
+	 Set<String>key = TestClass.testBook.keySet();
+	 Iterator it = key.iterator();
+	 while(it.hasNext()){ ë§µì—ì„œ íŠ¹ì • ë§¤ê°œë³€ìˆ˜ ê°’ì— ë§ê²Œ ê°ì²´ ì •ë³´ êº¼ë‚´ì˜¤ëŠ” ë°©ë²•
+	 	String key = (String)it.next();
+	 	Book b = TestClass.testBook.get(key);
+	 }
+		
+	}*/
+	
 	/*
-	 * @Param »ç¿ëÀÚ Á¤º¸(ÇöÀç Á¢¼ÓÇÑ »ç¿ëÀÚ ¾ÆÀÌµğ, Ã¥ Á¤º¸), »ç¿ëÀÚ ÀüÃ¼ Á¤º¸, Ã¥ ÀüÃ¼ Á¤º¸, ´ëÃâ ÀüÃ¼ Á¤º¸
+	 @Param
+	 ì‚¬ìš©ì ì •ë³´(í˜„ì¬ ì ‘ì†í•œ ì‚¬ìš©ì ì•„ì´ë””, ì±… ì •ë³´), ì‚¬ìš©ì ì „ì²´ ì •ë³´, ì±… ì „ì²´ ì •ë³´, ëŒ€ì¶œ ì „ì²´ ì •ë³´ 
 	 */
-
+	
 	private Utils utils = Utils.getInstance();
 	private Map<String, User> users = new HashMap<String, User>();
 	private Map<String, Book> books = new HashMap<String, Book>();
-	private List<CheckOut> checkOuts = new ArrayList<CheckOut>();
+	private List<CheckOut>checkOuts = new ArrayList<CheckOut>();
+	
+	
+	
+	private static final String USER_FILE = "users.data";
+	private static final String BOOK_FILE = "books.data";
+	private static final String CHECKOUT_FILE = "checkOuts.data";
 
-	private static final String USER_FILE = "D:\\users.data";
-	private static final String BOOK_FILE = "D:\\books.data";
-	private static final String CHECKOUT_FILE = "D:\\checkOuts.data";
-
-	@SuppressWarnings("unchecked")
 	public LibraryDAO() {
 		File file = new File(USER_FILE);
 		File file1 = new File(BOOK_FILE);
 		File file2 = new File(CHECKOUT_FILE);
 		Object obj = null;
-
+		
 		if (file.exists()) {
 			obj = deSerialization(USER_FILE);
-			this.users = (Map<String, User>) obj;
+			this.users = (Map<String, User>)obj;
+			obj = null;
 		}
-		if (file1.exists()) {
+		if(file1.exists()) {
 			obj = deSerialization(BOOK_FILE);
-			this.books = (Map<String, Book>) obj;
+			this.books = (Map<String, Book>)obj;
+			obj = null;
 		}
-		if (file2.exists()) {
+		if(file2.exists()) {
 			obj = deSerialization(CHECKOUT_FILE);
-			this.checkOuts = (List<CheckOut>) obj;
+			this.checkOuts = (List<CheckOut>)obj;
 		}
-		/*
-		 * °ª Ãâ·Â Å×½ºÆ®
-		 */
-		StringBuilder sb = new StringBuilder();
-		Set<String>keySet = this.users.keySet();
-		List<String>temp = new ArrayList<String>(keySet);
-		Iterator<String>it = temp.iterator();
-		while(it.hasNext()) {
-			String key = it.next();
-			sb.append(String.format("%s%n",this.users.get(key)));
-		}
-		System.out.println(sb.toString());
 	}
-
+	
+	
 	/*
-	 * -È¸¿ø°¡ÀÔÀÌ ¿Ï·á µÇ¾ú½À´Ï´Ù. 
-	 * -ÀÌ¹Ì Á¸ÀçÇÏ´Â id ÀÔ´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä. 
-	 * -Àß¸øµÈ ºñ¹Ğ¹øÈ£ Çü½ÄÀÔ´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä. 
-	 * -Àß¸øµÈ ÀüÈ­¹øÈ£ Çü½ÄÀÔ´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä.
-	 */
-
-	public void register(String userId, String password, String name, String phone) {
+	-íšŒì›ê°€ì…ì´ ì™„ë£Œ ë˜ì—ˆìŠµë‹ˆë‹¤.
+	-ì´ë¯¸ ì¡´ì¬í•˜ëŠ” id ì…ë‹ˆë‹¤. ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”.
+	-ì˜ëª»ëœ ë¹„ë°€ë²ˆí˜¸ í˜•ì‹ì…ë‹ˆë‹¤. ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”.
+	-ì˜ëª»ëœ ì „í™”ë²ˆí˜¸ í˜•ì‹ì…ë‹ˆë‹¤. ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”.*/
+	
+	public void register(String userId, String password, String name, String phoneNumber) {
+		
 		User user = null;
 		String userNo = "U001";
 		
-		if (this.users.size() > 0) {
-			Set<String> key = this.users.keySet();
-			List<String> temp = new ArrayList<String>(key);
-
-			Collections.sort(temp, new Comparator<String>() {
-				@Override
-				public int compare(String s1, String s2) {
-					return s1.compareTo(s2);
-				}
-			});
-			String tempKey = temp.get(temp.size() - 1);
-			user = this.users.get(tempKey);
-			userNo = String.format("U%03d", Integer.parseInt(user.getUserNo().substring(1)) + 1);
-		}
-		
-		User u = new User(userNo, userId, password, name, phone);
-		this.users.put(userNo, u);
-	}
-
-	/*
-	 * @Param »ç¿ëÀÚ ¾ÆÀÌµğ, »ç¿ëÀÚ ºñ¹Ğ¹øÈ£
-	 * ¹ü¿ëÀûÀ¸·Î »ç¿ë °¡´ÉÇÑ ¸Ş¼Òµå. (ÇöÀç »ç¿ëÀÚ ¼³Á¤¿ë, »ç¿ëÀÚ Á¸Àç ¿©ºÎ)  
-	 */
-	public User getCurrentUser(String userId, String password) {
-		//°á°ú °ªÀ¸·Î ³Ñ±æ User Å¸ÀÔ º¯¼ö »ı¼º
-		User user = null;
-		//ÀüÃ¼ usersÀÇ ¹İº¹¹®À» µ¹¸®¸ç, Å½»öÇÏ±â À§ÇØ set, list »ı¼º
 		Set<String>key = this.users.keySet();
 		List<String>temp = new ArrayList<String>(key);
-		//Iterator·Î ¹İº¹¹® µ¹¸®±â
-		Iterator<String> it = temp.iterator();
-		while(it.hasNext()) {
-			String keyTemp = (String)it.next();
-			//User Å¸ÀÔÀÇ ÀÓ½Ã º¯¼ö ¼±¾ğ ÈÄ users ¸Ê °´Ã¼ÀÇ °ª ÇÒ´ç
-			User u = this.users.get(keyTemp);
-			//¸Å°³º¯¼ö·Î ÀÔ·Â¹ŞÀº »ç¿ëÀÚ ¾ÆÀÌµğ ¹× ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏ´Â °ªÀÌ ÀÖ´Ù¸é
-			if(u.getUserId().equals(userId)&&u.getPassword().equals(password)) {
-				//°á°ú °ªÀ» ¸®ÅÏÇÒ À¯Àú º¯¼ö¿¡ ÇÒ´ç
-				user = u;
-				//°á°ú °ªÀ» Ã£¾ÒÀ¸¹Ç·Î, ´õ ÀÌ»ó ¹İº¹¹®À» µ¹¸± ÇÊ¿ä°¡ ¾ø´Ù. break;
-				break;
-			}
+				
+		if(this.users.size()>0){
+			user = this.users.get("");
+			userNo = String.format("U%03d", Integer.parseInt(user.getUserNo().substring(1)) + 1); 
 		}
-		//°á°ú °ª ¸®ÅÏ -> °á°ú °ªÀÌ  nullÀÌ¶ó¸é, »ç¿ëÀÚ°¡ ¾ø´Ù´Â ¶æÀÌ´Ù. °¡Á®´Ù ¾µ ¶§ ³Î Ã¼Å© ÇÊ¼ö!
-		return user;
+		
+		User u = new User(userNo, userId, password, name, phoneNumber);
+		this.users.put(userNo, u);
 	}
 	
 	/*
-	 * »ç¿ëÀÚ ¾ÆÀÌµğ Á¸Àç ¿©ºÎ È®ÀÎ 
-	 * @Param »ç¿ëÀÚ ¾ÆÀÌµğ, »ç¿ëÀÚ ºñ¹Ğ¹øÈ£
-	 * ¾ÆÀÌµğ´Â Á¸ÀçÇÏÁö¸¸, ºñ¹Ğ¹øÈ£°¡ ¸ÂÁö ¾ÊÀ» °æ¿ì true¸¦ ¸®ÅÏÇÑ´Ù.
+	 @param
+	 ì•„ì´ë””, ë¹„ë°€ë²ˆí˜¸ ì…ë ¥ ê°’
+	 ì‚¬ìš©ì ë¡œê·¸ì¸ìš© ë©”ì†Œë“œ, í˜„ì¬ ì‚¬ìš©ìì˜ ê³ ìœ  ë²ˆí˜¸ ì €ì¥
 	 */
-	public boolean isWrongPassword(String userId, String password) {
-		boolean result = false;
-		Set<String>key = this.users.keySet();
-		List<String>temp = new ArrayList<String>(key);
-		Iterator<String> it = temp.iterator();
-		while(it.hasNext()) {
-			String keyTemp = (String)it.next();
-			User u = this.users.get(keyTemp);
-			if(u.getUserId().equals(userId)&&!u.getPassword().equals(password)) {
-				result = true;
-				break;
-			}
-		}
-		return result;
+	public void login(String userId, String password) {
+		
 	}
+	
 	/*
-	 * @Param ÆÄÀÏÀÌ¸§  
-	 * ÆÄÀÏ ¿ªÁ÷·ÄÈ­
-	 * ÇÁ·Î±×·¥ ½ÇÇà½Ã users, books, checkouts ÃÊ±âÈ­¸¦ À§ÇÑ ¸Ş¼Òµå
+	 ì‚¬ìš©ì ì•„ì´ë”” ì´ë¯¸ ì¡´ì¬ ì—¬ë¶€ í™•ì¸ ì˜ˆì™¸ì²˜ë¦¬
+	 */
+	public void isExistUser(String userId) throws ExistUserException{
+		
+	}
+	
+	/*
+	 @Param 
+	 íŒŒì¼ì´ë¦„
+	 ì—­ì§ë ¬í™”
 	 */
 	public Object deSerialization(String fileName) {
 		Object result = null;
@@ -156,7 +129,7 @@ public class LibraryDAO {
 		try {
 			fs = new FileInputStream(fileName);
 			os = new ObjectInputStream(fs);
-			result = os.readObject();
+			result = os.readObject();			
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		} finally {
@@ -169,28 +142,22 @@ public class LibraryDAO {
 		}
 		return result;
 	}
-
-	// ÇÁ·Î±×·¥ Á¾·á½Ã users, books, checkOuts µ¥ÀÌÅÍ ÀúÀå
-	public void logout() {
+	
+	//í”„ë¡œê·¸ë¨ ì¢…ë£Œì‹œ users, books, checkOuts ë°ì´í„° ì €ì¥
+	public ObjectOutputStream fileSave() {
 		FileOutputStream fs = null;
 		ObjectOutputStream os = null;
 		try {
-			if (this.users.size() > 0) {
-				fs = new FileOutputStream(USER_FILE);
-				os = new ObjectOutputStream(fs);
-				os.writeObject(this.users);
-			}
-			if (this.books.size() > 0) {
-				fs = new FileOutputStream(BOOK_FILE);
-				os = new ObjectOutputStream(fs);
-				os.writeObject(this.books);
-			}
-			if (this.checkOuts.size() > 0) {
-				fs = new FileOutputStream(CHECKOUT_FILE);
-				os = new ObjectOutputStream(fs);
-				os.writeObject(this.checkOuts);
-			}
-			// ÄÃ·º¼Ç ÀúÀå¼Ò¿¡ ÀúÀåµÈ ¸ğµç Á¤º¸¸¦ Á÷·ÄÈ­ ½Ãµµ
+			fs = new FileOutputStream(USER_FILE);
+			os = new ObjectOutputStream(fs);
+			os.writeObject(this.users);
+			fs = new FileOutputStream(BOOK_FILE);
+			os = new ObjectOutputStream(fs);
+			os.writeObject(this.books);
+			fs = new FileOutputStream(CHECKOUT_FILE);
+			os = new ObjectOutputStream(fs);
+			os.writeObject(this.checkOuts);
+			//ì»¬ë ‰ì…˜ ì €ì¥ì†Œì— ì €ì¥ëœ ëª¨ë“  ì •ë³´ë¥¼ ì§ë ¬í™” ì‹œë„
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -201,5 +168,255 @@ public class LibraryDAO {
 				e.printStackTrace();
 			}
 		}
+		return os;
 	}
+	
+	
+
+	
+	
+	// ì „ì²´ ë„ì„œ ì¶œë ¥
+
+	public String viewAllBooks() {
+
+		//0: ë¹„ì¹˜ì¤‘, 1: ëŒ€ì¶œì¤‘, 2:ì—°ì²´ì¤‘ ì„ ìˆ˜ì •í•˜ê¸°
+		this.changeBookStatus();
+		
+		StringBuilder sb = new StringBuilder();
+		Set<String> key = this.books.keySet();
+
+		// BOOKì˜ KEYê°’ì„ ì €ì¥í•˜ê¸° ìœ„í•œ ì„ì‹œë³€ìˆ˜ LIST b
+		List<String> b = new ArrayList<String>(key);
+
+		Collections.sort(b, new Comparator<String>() {
+			@Override
+			public int compare(String b1, String b2) {
+				return b1.compareTo(b2);
+			}
+		});
+
+		for (String i : b) {
+			sb.append(String.format("%-20s%-40s%-60s%-80s%-100s%n", this.books.get(i).getBookNo(),
+					this.books.get(i).getBookTitle(), this.books.get(i).getPublisher(), this.books.get(i).getAuthor()
+					,this.books.get(i).getBookStatusString()
+					));
+			
+
+		}
+		return sb.toString();
+
+	}
+	
+	
+	//0: ë¹„ì¹˜ì¤‘, 1: ëŒ€ì¶œì¤‘, 2:ì—°ì²´ì¤‘
+	//ì—°ì²´ ê°’(0: ë¹„ì¹˜ì¤‘, 1: ëŒ€ì¶œì¤‘, 2:ì—°ì²´ì¤‘) ë³€ê²½ ë©”ì†Œë“œ
+	//ì „ì²´ ë³€ê²½ ê°’ìœ¼ë¡œ ìˆ˜ì •ìš”
+	//this.changeBookStatus(this.books.get(i).getBookStatus())));
+	public String changeBookStatus(int BookStatus) {
+
+		String temp = null;
+		switch (BookStatus) {
+		case 0:temp = "ë¹„ì¹˜ ì¤‘";break;
+		case 1:temp = "ëŒ€ì¶œ ì¤‘";break;
+		case 2:temp = "ì—°ì²´ ì¤‘";break;
+		}
+		return temp;
+	}
+
+	//ì „ì²´ ë¶ìƒíƒœê°’ ë³€ê²½
+	public void changeBookStatus() {
+		String temp = null;
+		Set<String> set = books.keySet();
+		List<String> list = new ArrayList<String>(set);
+		
+		for(String i : list) {
+	
+		switch (this.books.get(i).getBookStatus()) {
+		case 0:temp = "ë¹„ì¹˜ ì¤‘";break;
+		case 1:temp = "ëŒ€ì¶œ ì¤‘";break;
+		case 2:temp = "ì—°ì²´ ì¤‘";break;
+		   }
+		this.books.get(i).setBookStatusString(temp);
+		}
+	
+	}
+	
+	
+	// ì „ì²´ ì‚¬ìš©ì ì¶œë ¥
+	public String viewAllUsers() {
+
+		StringBuilder sb = new StringBuilder();
+		Set<String> key = this.users.keySet();
+
+		// USERì˜ KEYê°’ì„ ì €ì¥í•˜ê¸° ìœ„í•œ ì„ì‹œë³€ìˆ˜ LIST b
+		List<String> b = new ArrayList<String>(key);
+
+		Collections.sort(b, new Comparator<String>() {
+			@Override
+			public int compare(String b1, String b2) {
+				return b1.compareTo(b2);
+			}
+		});
+
+		for (String i : b) {
+
+			sb.append(String.format("%-10s%-10s%-10s%-10s%n", this.users.get(i).getUserNo(),
+					this.users.get(i).getUserId(), this.users.get(i).getName(), this.users.get(i).getphone()));
+		}
+		return sb.toString();
+	}
+
+	// ì—°ì²´ ë„ì„œ ì „ì²´ ë³´ê¸°
+	public String viewOverdueBooks() {
+
+		// ì—°ì²´ì¼ ê³„ì‚° ë©”ì†Œë“œ í˜¸ì¶œ
+		this.setAllOverdueDays();
+ 
+		// BookNOì™€ UserNoë¥¼ ì €ì¥í•˜ê¸° ìœ„í•œ ì„ì‹œë³€ìˆ˜
+		String temp = null;
+		String temp1 = null;
+
+		StringBuilder sb = new StringBuilder();
+
+		Set<String> key = this.books.keySet();
+
+		List<String> b = new ArrayList<String>(key);
+		Collections.sort(b, new Comparator<String>() {
+			@Override
+			public int compare(String b1, String b2) {
+				return b1.compareTo(b2);
+			}
+		});
+		
+		
+		for (String c : b) {
+			if (this.books.get(c).getBookStatus() == 2) {
+				sb.append(this.books.get(c).getBookNo());
+				sb.append(this.books.get(c).getBookTitle());
+				sb.append(this.books.get(c).getAuthor());
+				sb.append(this.books.get(c).getPublisher());
+				temp = this.books.get(c).getBookNo();
+
+			}
+			for (CheckOut d : checkOuts) {
+
+				if (temp == d.getcBookNo() && d.getReturnDate() == null) {
+					sb.append(d.getCheckOutDate());
+					sb.append(d.getDueDate());
+					sb.append(d.getOverdueDays());
+					temp1 = d.getcUserNo();
+				}
+
+			}
+
+			if (temp1 == null)
+				continue;
+			sb.append(this.users.get(temp1).getName());
+			sb.append(this.users.get(temp1).getUserNo());
+
+			temp = null;
+			temp1 = null;
+		}
+		return sb.toString();
+	}
+		
+	// ì—°ì²´ì¼ìˆ˜ ê³„ì‚° ë©”ì†Œë“œ
+	public void setAllOverdueDays() {
+		
+		
+		int a = 0;
+		LocalDate nowDate = LocalDate.now();
+
+		for (CheckOut c : this.checkOuts) {
+			if (c.getReturnDate() == null && nowDate.isAfter(LocalDate.parse(c.getDueDate()))) {
+				Period period = Period.between(nowDate, LocalDate.parse(c.getDueDate()));
+				a = period.getDays();
+				c.setOverdueDays(a);
+
+			}
+		}
+	}
+		
+		/*
+
+		// ì—°ì²´ì¼ìˆ˜ ê³„ì‚° ë©”ì†Œë“œ
+		//íš¨ìœ¨ì ì´ ê²ƒ ì‚¬ìš©
+		public void setOverdueDays(String BookNo) {
+			int a = 0;
+			LocalDate nowDate = LocalDate.now();
+			
+			//if(c.getReturnDate() == null)
+		
+			for (CheckOut c : this.checkOuts) {
+				if (BookNo == c.getcBookNo() && nowDate.isAfter(LocalDate.parse(c.getDueDate()))) {
+					Period period = Period.between(nowDate, LocalDate.parse(c.getDueDate()));
+					a = period.getDays();
+					c.setOverdueDays(a);
+					
+				}
+			}
+			
+		
+		}*/
+		
+	
+		//ì˜ˆì™¸ì²˜ë¦¬
+		//íŒ¨í„´í˜•ì‹
+		//ë§¤ê°œë³€ìˆ˜ : ì±… ë“±ë¡ë²ˆí˜¸
+		//ë°˜ë‚©ë˜ì§€ ì•Šì€ ì±…ë§Œ ìˆ˜ì •ê°€ëŠ¥
+		/*
+		public void changeDueDate(String bookNo, String dueDate) throws CheckDueDateException {
+
+			try {
+			String checkBookNo = "[B]\\d3";
+			String checkDueDate = "\\d4";
+
+			//ë‚ ì§œ í˜•ì‹?
+			//ì‚¬ìš©ì ì •ì˜ ì˜ˆì™¸
+			boolean result = Pattern.matches(checkBookNo, bookNo);
+			}catch(Exception e) {
+				
+			}
+			
+			
+			for(CheckOut d : TestClass.testCheckOut ) {
+				if(bookNo == d.getcBookNo() && d.getReturnDate() == null) {
+					d.setDueDate(dueDate);
+					
+					
+				}
+				
+			}
+			
+			
+		}*/
+		
+		
+	// ë°˜ë‚© ì˜ˆì •ì¼ ë³€ê²½
+	/*
+	  @Param 
+	  ìˆ˜ì •í•  ì±…ì˜ ê³ ìœ ë²ˆí˜¸, ìˆ˜ì •í•  ë‚ ì§œ
+	 */
+	
+	
+	
+	public String changeDueDate(String bookNo, String dueDate) {
+ 
+		StringBuilder sb = new StringBuilder();
+		boolean temp = books.containsKey(bookNo);
+		if(temp == false) {
+			sb.append("ì˜ëª»ëœ í˜•ì‹ì…ë‹ˆë‹¤.");
+		}		
+		for (CheckOut d : checkOuts) {
+			if (bookNo == d.getcBookNo() && d.getReturnDate() == null) {
+				d.setDueDate(dueDate);
+				sb.append("ë°˜ë‚© ì˜ˆì •ì¼ ë³€ê²½ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.");
+			}
+		}
+		return sb.toString();
+	}
+		
+	
+	
+	
 }

@@ -2,7 +2,7 @@ package sist.group1;
 
 public class ExistUserException extends Exception {
 
-	//»ç¿ëÀÚ°¡ ÀÌ¹Ì Á¸ÀçÇÒ °æ¿ì, ¹ß»ıÇÏ´Â ¿¹¿Ü
+	//ì‚¬ìš©ìê°€ ì´ë¯¸ ì¡´ì¬í•  ê²½ìš°, ë°œìƒí•˜ëŠ” ì˜ˆì™¸
 	public ExistUserException() {
 		super();
 	}

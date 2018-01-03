@@ -7,7 +7,7 @@ public class TestClass {
 	/*
 	 @Param
 	 testData
-	 °ª °¡Á®¿Ã ¶§  ¾Æ·¡ Çü½ÄÀ¸·Î iterator »ç¿ëÇÏ½Ã¸é µË´Ï´Ù.
+	 ê°’ ê°€ì ¸ì˜¬ ë•Œ  ì•„ë˜ í˜•ì‹ìœ¼ë¡œ iterator ì‚¬ìš©í•˜ì‹œë©´ ë©ë‹ˆë‹¤.
 	 Set<String>key = TestClass.testBook.keySet();
 	 Iterator it = key.iterator();
 	 while(it.hasNext()){
@@ -21,17 +21,17 @@ public class TestClass {
 	static {
 		/*
 		 @Param
-		 Å°: µî·Ï¹øÈ£(ex. B001, B002...), µî·Ï¹øÈ£, µµ¼­¸í, ÀúÀÚ, ÃâÆÇ»ç
+		 í‚¤: ë“±ë¡ë²ˆí˜¸(ex. B001, B002...), ë“±ë¡ë²ˆí˜¸, ë„ì„œëª…, ì €ì, ì¶œíŒì‚¬
 		 */
-		testBook.put("B001", new Book("B001", "ÀÌ°ÍÀÌÀÚ¹Ù´Ù", "½ÅÁ¾±Ç","ÇÑºû¹Ìµğ¾î"));
-		testBook.put("B002", new Book("B002", "C¸¦ ÅëÇØ ¹è¿ì´Â ÀÚ·á±¸Á¶", "À±¼º¿ì","¿À·»Áö¹Ìµğ¾î"));
-		testBook.put("B003", new Book("B003", "TCP/IP À©µµ¿ì ¼ÒÄÏÇÁ·Î±×·¡¹Ö", "±è¼±¿ì","ÇÑºû¹Ìµğ¾î"));
+		testBook.put("B001", new Book("B001", "ì´ê²ƒì´ìë°”ë‹¤", "ì‹ ì¢…ê¶Œ","í•œë¹›ë¯¸ë””ì–´"));
+		testBook.put("B002", new Book("B002", "Cë¥¼ í†µí•´ ë°°ìš°ëŠ” ìë£Œêµ¬ì¡°", "ìœ¤ì„±ìš°","ì˜¤ë Œì§€ë¯¸ë””ì–´"));
+		testBook.put("B003", new Book("B003", "TCP/IP ìœˆë„ìš° ì†Œì¼“í”„ë¡œê·¸ë˜ë°", "ê¹€ì„ ìš°","í•œë¹›ë¯¸ë””ì–´"));
 		testBook.put("B004", new Book("B004", "Oracle 2007","S H KIM", "Orange Media"));
 		testBook.put("B005", new Book("B005", "MS Office 2010","D H Ahn", "Orange Media"));
 		
 		/*
 		 @Param 
-		 Å°: È¸¿ø¹øÈ£(ex. U001, U002...), °ª: È¸¿ø¹øÈ£ ,¾ÆÀÌµğ, ºñ¹Ğ¹øÈ£, ÀÌ¸§, ÀüÈ­¹øÈ£, ¹ŞÀº ¸Ş¼¼Áö, À¯Àú °íÀ¯ÀÇ ´ëÃâ Á¤º¸
+		 í‚¤: íšŒì›ë²ˆí˜¸(ex. U001, U002...), ê°’: íšŒì›ë²ˆí˜¸ ,ì•„ì´ë””, ë¹„ë°€ë²ˆí˜¸, ì´ë¦„, ì „í™”ë²ˆí˜¸, ë°›ì€ ë©”ì„¸ì§€, ìœ ì € ê³ ìœ ì˜ ëŒ€ì¶œ ì •ë³´
 		 */
 		testUser.put("U001", new User("U001","clear219","1234","SeongJaeMoon","010-4318-0221"));
 		testUser.put("U002", new User("U002","sjmoon0221","1234","SeongjaeMoon","010-4318-0221"));

@@ -1,22 +1,18 @@
 package sist.group1;
 
-import java.io.Serializable;
+public class Book {
 
-public class Book implements Serializable, Comparable<Book>{
-
-	/**
-	 * Á÷·ÄÈ­ UID
-	 */
-	private static final long serialVersionUID = 2L;
 	/*
 	 @Param
-	 °íÀ¯¹øÈ£(ex. BOO1, BOO2...), µµ¼­¸í, ÀúÀÚ, ÃâÆÇ»ç, ÇöÀç µµ¼­ »óÅÂ
+	 ê³ ìœ ë²ˆí˜¸(ex. BOO1, BOO2...), ë„ì„œëª…, ì €ì, ì¶œíŒì‚¬, í˜„ì¬ ë„ì„œ ìƒíƒœ
 	 */
 	private String bookNo;
 	private String bookTitle;
 	private String author;
-	private String publisher;
-	private int bookStatus; //0: ºñÄ¡Áß, 1: ´ëÃâÁß, 2:¿¬Ã¼Áß
+	private String publisher;	
+	private int bookStatus; //0: ë¹„ì¹˜ì¤‘, 1: ëŒ€ì¶œì¤‘, 2:ì—°ì²´ì¤‘
+	//bookStatus ìƒíƒœê°’ì„ ìƒíƒœë¡œ ì €ì¥ ìœ„í•œ ë³€ìˆ˜
+	private String bookStatusString;
 	
 	public Book() {
 		
@@ -29,7 +25,6 @@ public class Book implements Serializable, Comparable<Book>{
 		this.author = author;
 		this.publisher = publisher;
 	}
-	
 	public String getPublisher() {
 		return publisher;
 	}
@@ -54,25 +49,24 @@ public class Book implements Serializable, Comparable<Book>{
 		this.bookStatus = bookStatus;
 	}
 	
-	@Override
-	public boolean equals(Object obj) {
-		boolean result = false;
-		if(obj instanceof Book) {
-			Book book = (Book)obj;
-			if(this.bookNo.equals(book.getBookNo())){
-				result = true;
-			}
-		}
-		return result;
+	public String getBookStatusString() {
+		return bookStatusString;
 	}
 	
+    public void setBookStatusString(String bookStatusString) {
+		this.bookStatusString = bookStatusString;
+	} 
+	
 	@Override
-	public int compareTo(Book o) {
-		int result = 0;
-		if(o instanceof Book) {
-			Book book = (Book)o;
-			result = this.bookNo.compareTo(book.getBookNo());
-		}
-		return result;
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append(String.format("%-10s%-20s%-20s%-10s%-10s%n",this.bookNo,this.bookTitle,this.author,this.publisher,this.bookStatus));
+		
+		
+		return sb.toString();
+		
+		
 	}
+
 }

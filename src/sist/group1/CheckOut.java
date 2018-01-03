@@ -1,23 +1,17 @@
 package sist.group1;
 
-import java.io.Serializable;
-
-public class CheckOut implements Serializable {
+public class CheckOut {
 	
-	/**
-	 * Á÷·ÄÈ­ UID
-	 */
-	private static final long serialVersionUID = 3L;
 	/*
 	 @Param
-	  Ã¥ÀÇ µî·Ï¹øÈ£, ´ëÃâÀÚ ¹øÈ£, ´ëÃâÀÏ, ¹İ³³ÀÔ, ¹İ³³¿¹Á¤ÀÏ, Ã¥ »óÅÂ, ¹İ³³»óÅÂ(º¸·ù), ¿¬Ã¼ÀÏ¼ö  
+	  ì±…ì˜ ë“±ë¡ë²ˆí˜¸, ëŒ€ì¶œì ë²ˆí˜¸, ëŒ€ì¶œì¼, ë°˜ë‚©ì…, ë°˜ë‚©ì˜ˆì •ì¼, ì±… ìƒíƒœ, ë°˜ë‚©ìƒíƒœ(ë³´ë¥˜), ì—°ì²´ì¼ìˆ˜  
 	 */
 	private String bookNo;
 	private String userNo;
 	private String checkOutDate;
 	private String returnDate;
 	private String dueDate;
-	//private int checkOutbookStatus; //0: ¹İ³³¿Ï·á, 1: ´ëÃâÁß, 2: ¿¬Ã¼Áß
+	//private int checkOutbookStatus; //0: ë°˜ë‚©ì™„ë£Œ, 1: ëŒ€ì¶œì¤‘, 2: ì—°ì²´ì¤‘
 	private int overdueDays;
 
 	public CheckOut() {
@@ -51,19 +45,25 @@ public class CheckOut implements Serializable {
 		return userNo;
 	}
 
+
+
+
 	public String getDueDate() {
 		return dueDate;
 	}
 	
-	//dueDate(¹İ³³ ¿¹Á¤ÀÏ)Àº »ı¼ºÀÚ È£Ãâ½ÃÁ¡¿¡ cDate + 7
+	//dueDate(ë°˜ë‚© ì˜ˆì •ì¼)ì€ ìƒì„±ì í˜¸ì¶œì‹œì ì— cDate + 7
 	public void setDueDate(String dueDate) {
 		this.dueDate = dueDate;
 	}
+
+	
 
 	public int getOverdueDays() {
 		return overdueDays;
 	}
 
+	//í•„ìš”í•´ì„œ ë§Œë“¦
 	public void setOverdueDays(int overdueDays) {
 		this.overdueDays = overdueDays;
 	}	

@@ -4,13 +4,13 @@ public class Utils {
 	
 	/*
 	 @Param
-	 °ü¸®ÀÚ ID,PW -> admin123
-	 Singleton -> ÀÎ½ºÅÏ½º·Î Utils utils = Utils.getInstance(); Çü½ÄÀ¸·Î °¡Á®¿À¸é µË´Ï´Ù.
-	 Å¬·¡½º ³»ÀÇ ¾Æ¹« °÷¿¡¼­³ª utils.¸Ş¼Òµå¸í(); À¸·Î °ª ÇÚµé¸µ °¡´É
+	 ê´€ë¦¬ì ID,PW -> admin123
+	 Singleton -> ì¸ìŠ¤í„´ìŠ¤ë¡œ Utils utils = Utils.getInstance(); í˜•ì‹ìœ¼ë¡œ ê°€ì ¸ì˜¤ë©´ ë©ë‹ˆë‹¤.
+	 í´ë˜ìŠ¤ ë‚´ì˜ ì•„ë¬´ ê³³ì—ì„œë‚˜ utils.ë©”ì†Œë“œëª…(); ìœ¼ë¡œ ê°’ í•¸ë“¤ë§ ê°€ëŠ¥
 	 */
-	private final String ADMIN ="admin123";
+	private static final String ADMIN ="admin123";
 	private static Utils utils = null;
-	private User user;
+	private String uid;
 	
 	private Utils() {
 		
@@ -24,16 +24,16 @@ public class Utils {
 		return Utils.utils;
 	}
 	
-	public String getAdmin() {
-		return ADMIN;
+	public static String getAdmin() {
+		return Utils.ADMIN;
 	}
 	
-	public void setCurrentUser(User user) {
-		this.user = user;
+	public void setCurrentUser(String uid) {
+		this.uid = uid;
 	}
 	
-	public User getCurrentUser() {
-		return user;
+	public String getCurrentUser() {
+		return uid;
 	}
 
 }

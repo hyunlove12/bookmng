@@ -1,17 +1,12 @@
 package sist.group1;
 
-import java.io.Serializable;
 import java.util.*;
 
-public class User implements Serializable, Comparable<User> {
+public class User {
 	
-	/**
-	 * Á÷·ÄÈ­ UID
-	 */
-	private static final long serialVersionUID = 1L;
 	/*
 	 @Param 
-	 °íÀ¯¹øÈ£(ex. U001, U002...), ¾ÆÀÌµğ, ºñ¹Ğ¹øÈ£, ÀÌ¸§, ÀüÈ­¹øÈ£, ¹ŞÀº ¸Ş¼¼Áö, À¯Àú °íÀ¯ÀÇ ´ëÃâ Á¤º¸
+	 ê³ ìœ ë²ˆí˜¸(ex. U001, U002...), ì•„ì´ë””, ë¹„ë°€ë²ˆí˜¸, ì´ë¦„, ì „í™”ë²ˆí˜¸, ë°›ì€ ë©”ì„¸ì§€, ìœ ì € ê³ ìœ ì˜ ëŒ€ì¶œ ì •ë³´
 	 */
 	private String userNo;
 	private String userId; 
@@ -67,7 +62,7 @@ public class User implements Serializable, Comparable<User> {
 
 	@Override
 	public String toString() {
-		return String.format("%s %s %s %2s %2s", this.userNo, this.name, this.userId, this.password, this.phone);
+		return String.format("%s %s %2s %2s", this.name, this.userId, this.password, this.phone);
 	}
 	
 	@Override
@@ -79,16 +74,6 @@ public class User implements Serializable, Comparable<User> {
 					&&this.userId.equals(user.getPassword())) {
 				result = true;
 			}
-		}
-		return result;
-	}
-
-	@Override
-	public int compareTo(User o) {
-		int result = 0;
-		if(o instanceof User) {
-			User user = (User)o;
-			result = this.userId.compareTo(user.getUserId());
 		}
 		return result;
 	}
