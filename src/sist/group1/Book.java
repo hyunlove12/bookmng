@@ -9,10 +9,15 @@ public class Book {
 	private String bookNo;
 	private String bookTitle;
 	private String author;
+<<<<<<< HEAD
 	private String publisher;	
 	private int bookStatus; //0: ë¹„ì¹˜ì¤‘, 1: ëŒ€ì¶œì¤‘, 2:ì—°ì²´ì¤‘
 	//bookStatus ìƒíƒœê°’ì„ ìƒíƒœë¡œ ì €ìž¥ ìœ„í•œ ë³€ìˆ˜
 	private String bookStatusString;
+=======
+	private String publisher;
+	private String bookStatus; //ºñÄ¡Áß, ´ëÃâÁß, ¿¬Ã¼Áß
+>>>>>>> upstream/master
 	
 	public Book() {
 		
@@ -24,6 +29,7 @@ public class Book {
 		this.bookTitle = bookTitle;
 		this.author = author;
 		this.publisher = publisher;
+		setBookStatus("ºñÄ¡Áß");
 	}
 	public String getPublisher() {
 		return publisher;
@@ -41,12 +47,19 @@ public class Book {
 		return author;
 	}
 	
-	public int getBookStatus() {
+	public String getBookStatus() {
 		return bookStatus;
 	}
 
-	public void setBookStatus(int bookStatus) {
+	public void setBookStatus(String bookStatus) {
 		this.bookStatus = bookStatus;
+	}
+		
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(String.format("%-10s%-20s%-20s%-10s%-10s%n",this.bookNo,this.bookTitle,this.author,this.publisher,this.bookStatus));
+		return sb.toString();
 	}
 	
 	public String getBookStatusString() {
@@ -58,6 +71,7 @@ public class Book {
 	} 
 	
 	@Override
+<<<<<<< HEAD
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		
@@ -67,6 +81,14 @@ public class Book {
 		return sb.toString();
 		
 		
+=======
+	public int hashCode() {
+		return 31 * this.bookNo.hashCode();
+	}
+	@Override
+	public int compareTo(Book book) {
+		return this.bookNo.compareTo(book.getBookNo());
+>>>>>>> upstream/master
 	}
 
 }

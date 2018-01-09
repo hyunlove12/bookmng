@@ -1,6 +1,12 @@
 package sist.group1;
 
+<<<<<<< HEAD
 public class CheckOut {
+=======
+import java.io.Serializable;
+
+public class CheckOut implements Serializable, Comparable<CheckOut> {
+>>>>>>> upstream/master
 	
 	/*
 	 @Param
@@ -32,16 +38,20 @@ public class CheckOut {
 	public void setCheckOutDate(String checkOutDate) {
 		this.checkOutDate = checkOutDate;
 	}
+	
+	public void setReturnDate(String returnDate) {
+		this.returnDate = returnDate;
+	}
 
 	public String getReturnDate() {
 		return returnDate;
 	}
 
-	public String getcBookNo() {
+	public String getBookNo() {
 		return bookNo;
 	}
 
-	public String getcUserNo() {
+	public String getUserNo() {
 		return userNo;
 	}
 
@@ -68,12 +78,9 @@ public class CheckOut {
 		this.overdueDays = overdueDays;
 	}	
 	
-	/*public int getcheckOutbookStatus() {
-	return checkOutbookStatus;
-	}*/
-	
-	/*public void setccheckOutbookStatus(int checkOutbookStatus) {
-	this.checkOutbookStatus = checkOutbookStatus;
-	}*/
+	@Override
+	public int compareTo(CheckOut checkOut) {
+		return this.checkOutDate.compareTo(checkOut.getCheckOutDate());
+	}
 	
 }

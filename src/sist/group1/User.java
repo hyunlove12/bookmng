@@ -62,7 +62,11 @@ public class User {
 
 	@Override
 	public String toString() {
+<<<<<<< HEAD
 		return String.format("%s %s %2s %2s", this.name, this.userId, this.password, this.phone);
+=======
+		return String.format("%s/%s/%s/%s/%s", this.userNo, this.name, this.userId, this.password, this.phone);
+>>>>>>> upstream/master
 	}
 	
 	@Override
@@ -77,4 +81,22 @@ public class User {
 		}
 		return result;
 	}
+<<<<<<< HEAD
 }
+=======
+	
+	
+	@Override
+	public int hashCode() {
+		int result = 17;
+		result = 31 * result + this.userId.hashCode();
+		result = 31 * result + this.password.hashCode();
+		return result;
+	}
+	
+	@Override
+	public int compareTo(User user) {
+		return this.userId.compareTo(user.getUserId());
+	}
+}
+>>>>>>> upstream/master
